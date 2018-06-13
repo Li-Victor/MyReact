@@ -3,42 +3,29 @@
     const { name: degreeName, courses } = data;
     const header = MyReact.createElement('h1', null, degreeName);
 
-    const courseBody = [];
-    courses.forEach(({ name, lessons }) => {
+    const courseContent = courses.map(({ name, lessons }) => {
       const courseHeader = MyReact.createElement('h2', null, `Course: ${name}`);
 
-      const lessonBody = [];
-      lessons.forEach(({ name, materials }) => {
+      const lessonContent = lessons.map(({ name, materials }) => {
         const lessonHeader = MyReact.createElement('summary', null, name);
 
-        const materialsBody = [];
-        materials.forEach(({ name, link }) => {
-          const i = MyReact.createElement('p', null, `${name} ${link}`);
-          materialsBody.push(i);
+        const materialContent = materials.map(({ name, link }) => {
+          return MyReact.createElement('p', null, `${name} ${link}`);
         });
 
-        const lessonDetail = MyReact.createElement(
+        return MyReact.createElement(
           'details',
           null,
           lessonHeader,
-          ...materialsBody
+          ...materialContent
         );
-        lessonBody.push(lessonDetail);
       });
 
-      const lessonList = MyReact.createElement('div', null, ...lessonBody);
-
-      const courseContent = MyReact.createElement(
-        'div',
-        null,
-        courseHeader,
-        lessonList
-      );
-
-      courseBody.push(courseContent);
+      const lessonList = MyReact.createElement('div', null, ...lessonContent);
+      return MyReact.createElement('div', null, courseHeader, lessonList);
     });
 
-    const parent = MyReact.createElement('div', null, header, ...courseBody);
+    const parent = MyReact.createElement('div', null, header, ...courseContent);
     MyReact.render(parent, document.getElementById('root'));
   });
 })();
