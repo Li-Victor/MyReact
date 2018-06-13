@@ -1,0 +1,32 @@
+type Degree {
+  id: ID!
+  name: String!
+  courses: [Course]!
+}
+
+type Course {
+  id: ID!
+  courseTag: [String]!
+  name: String!
+  lessons: [Lesson]!
+}
+
+type Lesson {
+  id: ID!
+  lessonTag: [String]!
+  name: String!
+  materials: [Material]!
+}
+
+# type can be the following
+# type can be PDF, Video, Documents, Websites, MCQ
+# link can be a weblink, videolink, pdflink
+type Material {
+  id: ID!
+  type: String!
+  name: String!
+  link: String
+  question: String
+  choices: [String]
+  answer: Int
+}

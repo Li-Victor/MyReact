@@ -1,0 +1,105 @@
+{
+  "id": 2,
+  "name": "Angular",
+  "courses": [
+    {
+      "id": 1,
+      "courseTag": ["Javascript", "Beginner"],
+      "name": ["Javascript for Beginners"],
+      "lessons": [
+        {
+          "id": 1,
+          "lessonTag": ["Variables", "Types"],
+          "materials": [
+            {
+              "id": 1,
+              "type": "Video",
+              "name": "Introduction to Javascript",
+              "link": "intro.mp4"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "lessonTag": ["Control Flow"],
+          "materials": [
+            {
+              "id": 2,
+              "type": "Video",
+              "name": "Learn Javascript: Control Flow",
+              "link": "control_flow.mp4"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "lessonTag": ["Functions"],
+          "materials": [
+            {
+              "id": 3,
+              "type": "Video",
+              "name": "Learn Javascript: Functions",
+              "link": "functions.mp4"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "lessonTag": ["Scope"],
+          "materials": [
+            {
+              "id": 4,
+              "type": "Video",
+              "name": "Learn Javascript: Scope",
+              "link": "scope.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "courseTag": ["Javascript", "Advanced"],
+      "name": ["Advanced Javascript"],
+      "lessons": [
+        {
+          "id": 5,
+          "lessonTag": ["Scope"],
+          "materials": [
+            {
+              "id": 4,
+              "type": "Video",
+              "name": "Learn Javascript: Scope",
+              "link": "scope.mp4"
+            },
+            {
+              "id": 5,
+              "type": "Website",
+              "name": "What is Scope?",
+              "link":
+                "https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch1.md"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "lessonTag": ["Hoisting"],
+          "materials": [
+            {
+              "id": 6,
+              "type": "PDF",
+              "name": "Hoisting",
+              "link": "Hoisting.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "courseTag": ["Angular", "Beginner"],
+      "name": "Angular 101",
+      "lessons": []
+    }
+  ]
+}
