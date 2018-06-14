@@ -8,31 +8,28 @@
   const Material = ({ name, link }) =>
     MyReact.createElement('p', null, `${name} ${link}`);
 
-  function createMaterialContent({ name, link }) {
-    return MyReact.createElement(Material, { name, link }, null);
-  }
-
   $.getJSON('demo.json', data => {
     const { name: degreeName, courses } = data;
 
     const courseContent = courses.map(({ name, lessons }) => {
-      const lessonContent = lessons.map(({ name, materials }) => {
-        const materialContent = materials.map(createMaterialContent);
-
-        return MyReact.createElement(
-          'details',
-          null,
-          MyReact.createElement(lessonHeader, { name }, null),
-          ...materialContent
-        );
-      });
-
-      const lessonList = MyReact.createElement('div', null, ...lessonContent);
       return MyReact.createElement(
         'div',
         null,
         MyReact.createElement(courseHeader, { name }, null),
-        lessonList
+        MyReact.createElement(
+          'div',
+          null,
+          lessons.map(({ name, materials }) => {
+            return MyReact.createElement(
+              'details',
+              null,
+              MyReact.createElement(lessonHeader, { name }, null),
+              materials.map(({ name, link }) =>
+                MyReact.createElement(Material, { name, link }, null)
+              )
+            );
+          })
+        )
       );
     });
 
@@ -40,7 +37,7 @@
       'div',
       null,
       MyReact.createElement('h1', null, degreeName),
-      ...courseContent
+      courseContent
     );
     MyReact.render(parent, document.getElementById('root'));
   });

@@ -13,16 +13,25 @@
     domContainer.appendChild(ReactElement);
   }
 
+  // create Component or Component Tree
+  function createC_or_CT(element, child) {
+    if (Array.isArray(child)) {
+      child.forEach(component => {
+        createC_or_CT(element, component);
+      });
+    } else if (isDOMElement(child)) {
+      element.appendChild(child);
+    } else {
+      element.innerHTML += child;
+    }
+  }
+
   function createElement(type, props, ...children) {
     if (typeof type === 'string') {
       const element = document.createElement(type);
       // if it is not a DOM Element, then it is a string
       children.forEach(child => {
-        if (isDOMElement(child)) {
-          element.appendChild(child);
-        } else {
-          element.innerHTML += child;
-        }
+        createC_or_CT(element, child);
       });
       return element;
     } else {
