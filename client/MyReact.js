@@ -14,16 +14,21 @@
   }
 
   function createElement(type, props, ...children) {
-    const element = document.createElement(type);
-    // if it is not a DOM Element, then it is a string
-    children.forEach(child => {
-      if (isDOMElement(child)) {
-        element.appendChild(child);
-      } else {
-        element.innerHTML += child;
-      }
-    });
-    return element;
+    if (typeof type === 'string') {
+      const element = document.createElement(type);
+      // if it is not a DOM Element, then it is a string
+      children.forEach(child => {
+        if (isDOMElement(child)) {
+          element.appendChild(child);
+        } else {
+          element.innerHTML += child;
+        }
+      });
+      return element;
+    } else {
+      // creating functional components
+      return type(props);
+    }
   }
 
   window.MyReact = {
