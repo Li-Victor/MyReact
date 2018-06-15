@@ -1,21 +1,21 @@
 type Degree {
   id: ID!
   name: String!
-  courses: [Course]!
+  courses: [Course!]!
 }
 
 type Course {
   id: ID!
-  courseTag: [String]!
+  courseTag: [String!]!
   name: String!
   lessons: [Lesson]!
 }
 
 type Lesson {
   id: ID!
-  lessonTag: [String]!
+  lessonTag: [String!]!
   name: String!
-  materials: [Material]!
+  materials: [Material!]!
 }
 
 # type can be the following
@@ -25,8 +25,12 @@ type Material {
   id: ID!
   type: String!
   name: String!
-  link: String
+  link: String!
   question: String
   choices: [String]
   answer: Int
+}
+
+type Query {
+  text: String!
 }
