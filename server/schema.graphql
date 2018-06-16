@@ -32,5 +32,11 @@ type Material {
 }
 
 type Query {
-  text: String!
+  lessons(tag: String): [Lesson]!
+  lesson(id: ID!): Lesson
+  material(id: ID!): Material
+}
+
+type Mutation {
+  createMaterial(type: String!, name: String!, link: String!): Material!
 }

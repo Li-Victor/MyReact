@@ -8,10 +8,33 @@ const { importSchema } = require('graphql-import');
 // The GraphQL schema in string form
 const typeDefs = importSchema('server/schema.graphql');
 
+// fake db
+const Lessons = [];
+const Materials = [];
+
 // The resolvers
 const resolvers = {
   Query: {
-    text: () => 'Hello World'
+    lessons: (_, { tag }) => {
+      if (!tag) return Lessons;
+      return Lessons.filter(lesson => lesson.lessonTag === tag);
+    },
+    lesson: (_, { id }) => Lessons.find(lesson => lesson.id === id),
+    material: (_, { id }) =>
+      Materials.find(material => material.id === Number(id))
+  },
+  Mutation: {
+    createMaterial: (_, { type, name, link }) => {
+      const newMaterial = {
+        id: Materials.length,
+        type,
+        name,
+        link
+      };
+      console.log(newMaterial);
+      Materials.push(newMaterial);
+      return newMaterial;
+    }
   }
 };
 
