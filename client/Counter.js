@@ -6,6 +6,8 @@
       this.state = {
         value: 0
       };
+      this.onPlusClick = this.onPlusClick.bind(this);
+      this.onMinusClick = this.onMinusClick.bind(this);
     }
 
     // Steps for reRendering:
@@ -19,17 +21,9 @@
         MyReact.createElement(
           'div',
           null,
-          MyReact.createElement(
-            'button',
-            { onClick: this.onPlusClick.bind(this) },
-            '+'
-          ),
+          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
           MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement(
-            'button',
-            { onClick: this.onMinusClick.bind(this) },
-            '-'
-          )
+          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
         )
       );
     }
@@ -40,17 +34,9 @@
         MyReact.createElement(
           'div',
           null,
-          MyReact.createElement(
-            'button',
-            { onClick: this.onPlusClick.bind(this) },
-            '+'
-          ),
+          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
           MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement(
-            'button',
-            { onClick: this.onMinusClick.bind(this) },
-            '-'
-          )
+          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
         )
       );
     }
@@ -61,17 +47,9 @@
         MyReact.createElement(
           'div',
           null,
-          MyReact.createElement(
-            'button',
-            { onClick: this.onPlusClick.bind(this) },
-            '+'
-          ),
+          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
           MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement(
-            'button',
-            { onClick: this.onMinusClick.bind(this) },
-            '-'
-          )
+          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
         )
       );
     }
