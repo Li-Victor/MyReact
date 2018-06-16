@@ -33,12 +33,12 @@
       );
     });
 
-    const parent = MyReact.createElement(
+    const App = MyReact.createElement(
       'div',
       null,
       MyReact.createElement('h1', null, degreeName),
       courseContent
     );
-    MyReact.render(parent, document.getElementById('root'));
+    MyReact.render(App, document.getElementById('root'));
   });
 })();

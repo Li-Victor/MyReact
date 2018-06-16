@@ -9,8 +9,8 @@
           typeof el.nodeName === 'string';
   }
 
-  function render(ReactElement, domContainer) {
-    domContainer.appendChild(ReactElement);
+  function isClass(v) {
+    return typeof v === 'function' && /^\s*class\s+/.test(v.toString());
   }
 
   // create Component or Component Tree
@@ -27,7 +27,10 @@
   }
 
   function createElement(type, props, ...children) {
-    if (typeof type === 'string') {
+    if (isClass(type)) {
+      const ClassComponent = new type(props);
+      return ClassComponent.render();
+    } else if (typeof type === 'string') {
       const element = document.createElement(type);
       // if it is not a DOM Element, then it is a string
       children.forEach(child => {
@@ -40,8 +43,27 @@
     }
   }
 
+  function render(ReactElement, domContainer) {
+    if (isClass(ReactElement)) {
+      const ClassComponent = new ReactElement();
+      domContainer.appendChild(ClassComponent.render());
+    } else {
+      domContainer.appendChild(ReactElement);
+    }
+  }
+
+  class Component {
+    constructor(props) {
+      this.props = props;
+    }
+
+    render() {}
+    // set state
+  }
+
   window.MyReact = {
     render,
-    createElement
+    createElement,
+    Component
   };
 })();
