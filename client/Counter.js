@@ -54,6 +54,6 @@
       );
     }
   }
-
-  MyReact.render(Counter, document.getElementById('root'));
+  const App = MyReact.createElement('div', null, Counter, Counter);
+  MyReact.render(App, document.getElementById('root'));
 })();

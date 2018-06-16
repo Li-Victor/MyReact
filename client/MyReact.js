@@ -19,6 +19,9 @@
       child.forEach(component => {
         createC_or_CT(element, component);
       });
+    } else if (isClass(child)) {
+      const NewComponent = new child().render();
+      element.appendChild(NewComponent);
     } else if (isDOMElement(child)) {
       element.appendChild(child);
     } else {
