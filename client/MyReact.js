@@ -26,6 +26,19 @@
     }
   }
 
+  function applyProps(element, props) {
+    // iterate over props object
+    for (const [propKey, propVal] of Object.entries(props)) {
+      // Event listeners starts with "on"
+      if (propKey.match(/^on.*$/)) {
+        const EVL = propKey.slice(2).toLowerCase();
+        element.addEventListener(EVL, propVal);
+      } else {
+        element.setAttribute(propKey, propVal);
+      }
+    }
+  }
+
   function createElement(type, props, ...children) {
     if (isClass(type)) {
       const ClassComponent = new type(props);
@@ -36,6 +49,8 @@
       children.forEach(child => {
         createC_or_CT(element, child);
       });
+
+      if (props !== null) applyProps(element, props);
       return element;
     } else {
       // creating functional components
@@ -57,8 +72,15 @@
       this.props = props;
     }
 
-    render() {}
-    // set state
+    setState(newDomElement) {
+      this.domElement.replaceWith(newDomElement);
+      this.domElement = newDomElement;
+    }
+
+    render(domElement) {
+      this.domElement = domElement;
+      return domElement;
+    }
   }
 
   window.MyReact = {
