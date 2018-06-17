@@ -1,21 +1,21 @@
 type Degree {
   id: ID!
   name: String!
-  courses: [Course!]!
+  courses: [Course]!
 }
 
 type Course {
   id: ID!
-  courseTag: [String!]!
   name: String!
+  courseTag: [String]!
   lessons: [Lesson]!
 }
 
 type Lesson {
   id: ID!
-  lessonTag: [String!]!
   name: String!
-  materials: [Material!]!
+  lessonTag: [String]!
+  materials: [Material]!
 }
 
 # type can be the following
@@ -23,8 +23,8 @@ type Lesson {
 # link can be a weblink, videolink, pdflink
 type Material {
   id: ID!
-  type: String!
   name: String!
+  type: String!
   link: String!
   question: String
   choices: [String]
@@ -32,11 +32,18 @@ type Material {
 }
 
 type Query {
+  degrees: [Degree]!
+  degree(id: ID!): Degree
+  courses(tag: String): [Course]!
+  course(id: ID!): Course
   lessons(tag: String): [Lesson]!
   lesson(id: ID!): Lesson
   material(id: ID!): Material
 }
 
 type Mutation {
+  createDegree(name: String!, courseIDs: [ID]!): Degree!
+  createCourse(name: String!, lessonIDs: [ID]!, tag: [String]!): Course!
+  createLesson(name: String!, materialIDs: [ID]!, tag: [String]!): Lesson!
   createMaterial(type: String!, name: String!, link: String!): Material!
 }

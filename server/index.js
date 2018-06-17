@@ -9,21 +9,59 @@ const { importSchema } = require('graphql-import');
 const typeDefs = importSchema('server/schema.graphql');
 
 // fake db
+const Degrees = [];
+const Courses = [];
 const Lessons = [];
 const Materials = [];
 
 // The resolvers
 const resolvers = {
   Query: {
+    degrees: () => Degrees,
+    degree: (_, { id }) => Degrees.find(degree => degree.id === Number(id)),
+    courses: (_, { tag }) => {
+      if (!tag) return Courses;
+      return Courses.filter(course => course.coursesTag === course);
+    },
+    course: (_, { id }) => Courses.find(course => course.id === Number(id)),
     lessons: (_, { tag }) => {
       if (!tag) return Lessons;
       return Lessons.filter(lesson => lesson.lessonTag === tag);
     },
-    lesson: (_, { id }) => Lessons.find(lesson => lesson.id === id),
+    lesson: (_, { id }) => Lessons.find(lesson => lesson.id === Number(id)),
     material: (_, { id }) =>
       Materials.find(material => material.id === Number(id))
   },
   Mutation: {
+    createDegree: (_, { name, courseIDs }) => {
+      const newDegree = {
+        id: Degrees.length,
+        name,
+        courses: courseIDs.map(id => Courses[id])
+      };
+      Degrees.push(newDegree);
+      return newDegree;
+    },
+    createCourse: (_, { name, lessonIDs, tag }) => {
+      const newCourse = {
+        id: Courses.length,
+        name,
+        courseTag: tag,
+        lessons: lessonIDs.map(id => Lessons[id])
+      };
+      Courses.push(newCourse);
+      return newCourse;
+    },
+    createLesson: (_, { name, materialIDs, tag }) => {
+      const newLesson = {
+        id: Lessons.length,
+        name,
+        lessonTag: tag,
+        materials: materialIDs.map(id => Materials[id])
+      };
+      Lessons.push(newLesson);
+      return newLesson;
+    },
     createMaterial: (_, { type, name, link }) => {
       const newMaterial = {
         id: Materials.length,
@@ -31,7 +69,6 @@ const resolvers = {
         name,
         link
       };
-      console.log(newMaterial);
       Materials.push(newMaterial);
       return newMaterial;
     }
