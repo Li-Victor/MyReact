@@ -1,12 +1,49 @@
 (() => {
-  const courseHeader = ({ name }) =>
+  // Components
+  const CourseHeader = ({ name }) =>
     MyReact.createElement('h2', null, `Course: ${name}`);
 
-  const lessonHeader = ({ name }) =>
+  const LessonHeader = ({ name }) =>
     MyReact.createElement('summary', null, name);
 
-  const Material = ({ name, link }) =>
-    MyReact.createElement('p', null, `${name} ${link}`);
+  const WebLink = ({ name, link }) => {
+    return MyReact.createElement(
+      'div',
+      null,
+      MyReact.createElement('a', { href: link, target: '_blank' }, name)
+    );
+  };
+
+  const Video = ({ name, link }) => {
+    const youtubeID = link.replace('https://www.youtube.com/watch?v=', '');
+    return MyReact.createElement(
+      'div',
+      null,
+      MyReact.createElement('div', null, name),
+      MyReact.createElement(
+        'iframe',
+        {
+          id: 'ytplayer',
+          type: 'text/html',
+          width: '640',
+          height: '360',
+          src: `https://www.youtube.com/embed/${youtubeID}`
+        },
+        null
+      )
+    );
+  };
+
+  const Material = ({ name, type, link }) => {
+    if (type === 'Video') {
+      return MyReact.createElement(Video, { name, link }, null);
+    } else if (type === 'Website') {
+      return MyReact.createElement(WebLink, { name, link }, null);
+    } else {
+      // MCQ
+      return MyReact.createElement('p', null, `${name} ${type} ${link}`);
+    }
+  };
 
   $.getJSON('demo.json', data => {
     const { name: degreeName, courses } = data;
@@ -15,7 +52,7 @@
       return MyReact.createElement(
         'div',
         null,
-        MyReact.createElement(courseHeader, { name }, null),
+        MyReact.createElement(CourseHeader, { name }, null),
         MyReact.createElement(
           'div',
           null,
@@ -23,9 +60,9 @@
             return MyReact.createElement(
               'details',
               null,
-              MyReact.createElement(lessonHeader, { name }, null),
-              materials.map(({ name, link }) =>
-                MyReact.createElement(Material, { name, link }, null)
+              MyReact.createElement(LessonHeader, { name }, null),
+              materials.map(({ name, type, link }) =>
+                MyReact.createElement(Material, { name, type, link }, null)
               )
             );
           })

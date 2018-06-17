@@ -16,7 +16,7 @@
               "id": 1,
               "type": "Video",
               "name": "Variables",
-              "link": "variables.mp4"
+              "link": "https://www.youtube.com/watch?v=UAZRq7Ev5No"
             }
           ]
         },
@@ -29,7 +29,7 @@
               "id": 2,
               "type": "Video",
               "name": "Learn Javascript: Control Flow",
-              "link": "control_flow.mp4"
+              "link": "https://www.youtube.com/watch?v=4eqJNLl-03U"
             }
           ]
         },
@@ -42,7 +42,7 @@
               "id": 3,
               "type": "Video",
               "name": "Learn Javascript: Functions",
-              "link": "functions.mp4"
+              "link": "https://www.youtube.com/watch?v=uiv3oLsHbaI"
             }
           ]
         },
@@ -55,7 +55,7 @@
               "id": 4,
               "type": "Video",
               "name": "Learn Javascript: Scope",
-              "link": "scope.mp4"
+              "link": "https://www.youtube.com/watch?v=XR84vFUs4M4"
             }
           ]
         }
@@ -75,7 +75,7 @@
               "id": 4,
               "type": "Video",
               "name": "Learn Javascript: Scope",
-              "link": "scope.mp4"
+              "link": "https://www.youtube.com/watch?v=XR84vFUs4M4"
             },
             {
               "id": 5,
@@ -93,9 +93,10 @@
           "materials": [
             {
               "id": 6,
-              "type": "PDF",
+              "type": "Website",
               "name": "Hoisting",
-              "link": "Hoisting.pdf"
+              "link":
+                "https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch4.md"
             }
           ]
         }
