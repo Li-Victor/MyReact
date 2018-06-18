@@ -20,17 +20,13 @@
       'div',
       null,
       MyReact.createElement('div', null, name),
-      MyReact.createElement(
-        'iframe',
-        {
-          id: 'ytplayer',
-          type: 'text/html',
-          width: '640',
-          height: '360',
-          src: `https://www.youtube.com/embed/${youtubeID}`
-        },
-        null
-      )
+      MyReact.createElement('iframe', {
+        id: 'ytplayer',
+        type: 'text/html',
+        width: '640',
+        height: '360',
+        src: `https://www.youtube.com/embed/${youtubeID}`
+      })
     );
   };
 
@@ -58,7 +54,7 @@
         return MyReact.createElement(
           'div',
           null,
-          MyReact.createElement('input', inputProps, null),
+          MyReact.createElement('input', inputProps),
           MyReact.createElement(
             'label',
             {
@@ -89,7 +85,7 @@
           null,
           MyReact.createElement('legend', null, this.props.question),
           Choices,
-          MyReact.createElement('input', inputButtonProps, null),
+          MyReact.createElement('input', inputButtonProps),
           Message
         )
       );
@@ -118,9 +114,9 @@
 
   const Material = ({ name, type, link, question, choices, answer }) => {
     if (type === 'Video') {
-      return MyReact.createElement(Video, { name, link }, null);
+      return MyReact.createElement(Video, { name, link });
     } else if (type === 'Website') {
-      return MyReact.createElement(WebLink, { name, link }, null);
+      return MyReact.createElement(WebLink, { name, link });
     } else {
       // MCQ
       return MyReact.createElement(
@@ -138,7 +134,7 @@
       return MyReact.createElement(
         'div',
         null,
-        MyReact.createElement(CourseHeader, { name }, null),
+        MyReact.createElement(CourseHeader, { name }),
         MyReact.createElement(
           'div',
           null,
@@ -146,13 +142,16 @@
             return MyReact.createElement(
               'details',
               null,
-              MyReact.createElement(LessonHeader, { name }, null),
+              MyReact.createElement(LessonHeader, { name }),
               materials.map(({ name, type, link, question, choices, answer }) =>
-                MyReact.createElement(
-                  Material,
-                  { name, type, link, question, choices, answer },
-                  null
-                )
+                MyReact.createElement(Material, {
+                  name,
+                  type,
+                  link,
+                  question,
+                  choices,
+                  answer
+                })
               )
             );
           })
