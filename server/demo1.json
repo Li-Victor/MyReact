@@ -5,7 +5,7 @@
     {
       "id": 1,
       "courseTag": ["Javascript", "Beginner"],
-      "name": ["Javascript for Beginners"],
+      "name": "Javascript for Beginners",
       "lessons": [
         {
           "id": 1,
@@ -60,7 +60,7 @@
     {
       "id": 2,
       "courseTag": ["Javascript", "Advanced"],
-      "name": ["Advanced Javascript"],
+      "name": "Advanced Javascript",
       "lessons": [
         {
           "id": 5,

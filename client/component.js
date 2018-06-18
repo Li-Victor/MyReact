@@ -1,5 +1,5 @@
-(() => {
-  // Components
+// Components
+function components() {
   const CourseHeader = ({ name }) =>
     MyReact.createElement('h2', null, `Course: ${name}`);
 
@@ -127,44 +127,9 @@
     }
   };
 
-  $.getJSON('demo.json', data => {
-    const { name: degreeName, courses } = data;
-
-    const courseContent = courses.map(({ name, lessons }) => {
-      return MyReact.createElement(
-        'div',
-        null,
-        MyReact.createElement(CourseHeader, { name }),
-        MyReact.createElement(
-          'div',
-          null,
-          lessons.map(({ name, materials }) => {
-            return MyReact.createElement(
-              'details',
-              null,
-              MyReact.createElement(LessonHeader, { name }),
-              materials.map(({ name, type, link, question, choices, answer }) =>
-                MyReact.createElement(Material, {
-                  name,
-                  type,
-                  link,
-                  question,
-                  choices,
-                  answer
-                })
-              )
-            );
-          })
-        )
-      );
-    });
-
-    const App = MyReact.createElement(
-      'div',
-      null,
-      MyReact.createElement('h1', null, degreeName),
-      courseContent
-    );
-    MyReact.render(App, document.getElementById('root'));
-  });
-})();
+  return {
+    CourseHeader,
+    LessonHeader,
+    Material
+  };
+}

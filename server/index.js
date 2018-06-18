@@ -8,6 +8,8 @@ const { importSchema } = require('graphql-import');
 // The GraphQL schema in string form
 const typeDefs = importSchema('server/schema.graphql');
 
+const demo = require('./demo.json');
+
 // fake db
 const Degrees = [];
 const Courses = [];
@@ -90,6 +92,10 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
 // GraphiQL, a visual editor for queries
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
+app.get('/data', (req, res) => {
+  res.send(demo);
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
