@@ -10,6 +10,16 @@
       this.onMinusClick = this.onMinusClick.bind(this);
     }
 
+    display() {
+      return MyReact.createElement(
+        'div',
+        null,
+        MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
+        MyReact.createElement('div', null, `${this.state.value}`),
+        MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
+      );
+    }
+
     // Steps for reRendering:
     // 1. change state object
     // 2. create new element, like copying what was in the render function
@@ -17,41 +27,17 @@
 
     onPlusClick() {
       this.state.value += 1;
-      this.setState(
-        MyReact.createElement(
-          'div',
-          null,
-          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
-          MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
-        )
-      );
+      this.setState(this.display());
     }
 
     onMinusClick() {
       this.state.value -= 1;
-      this.setState(
-        MyReact.createElement(
-          'div',
-          null,
-          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
-          MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
-        )
-      );
+      this.setState(this.display());
     }
 
     // have to call super.render()
     render() {
-      return super.render(
-        MyReact.createElement(
-          'div',
-          null,
-          MyReact.createElement('button', { onClick: this.onPlusClick }, '+'),
-          MyReact.createElement('div', null, `${this.state.value}`),
-          MyReact.createElement('button', { onClick: this.onMinusClick }, '-')
-        )
-      );
+      return super.render(this.display());
     }
   }
   const App = MyReact.createElement('div', null, Counter, Counter);

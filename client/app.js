@@ -44,9 +44,7 @@
       };
     }
 
-    handleChange(event) {
-      this.state.value = event.target.value;
-      this.state.answered = true;
+    display() {
       const Choices = this.props.choices.map(choice => {
         const inputProps = {
           type: 'radio',
@@ -83,20 +81,24 @@
         return MyReact.createElement('div', null, message);
       })(this.state.message);
 
-      this.setState(
+      return MyReact.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
         MyReact.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
-          MyReact.createElement(
-            'fieldset',
-            null,
-            MyReact.createElement('legend', null, this.props.question),
-            Choices,
-            MyReact.createElement('input', inputButtonProps, null),
-            Message
-          )
+          'fieldset',
+          null,
+          MyReact.createElement('legend', null, this.props.question),
+          Choices,
+          MyReact.createElement('input', inputButtonProps, null),
+          Message
         )
       );
+    }
+
+    handleChange(event) {
+      this.state.value = event.target.value;
+      this.state.answered = true;
+      this.setState(this.display());
     }
 
     handleSubmit(event) {
@@ -106,103 +108,11 @@
           ? 'Correct!'
           : 'Wrong!';
 
-      const Choices = this.props.choices.map(choice => {
-        const inputProps = {
-          type: 'radio',
-          id: choice,
-          value: choice,
-          name: choice,
-          onChange: this.handleChange
-        };
-
-        if (choice === this.state.value) inputProps.checked = true;
-        return MyReact.createElement(
-          'div',
-          null,
-          MyReact.createElement('input', inputProps, null),
-          MyReact.createElement(
-            'label',
-            {
-              for: choice
-            },
-            choice
-          )
-        );
-      });
-
-      const inputButtonProps = {
-        type: 'submit',
-        value: 'Answer'
-      };
-
-      if (!this.state.answered) inputButtonProps.disabled = true;
-
-      const Message = (message => {
-        if (message === '') return null;
-        return MyReact.createElement('div', null, message);
-      })(this.state.message);
-
-      this.setState(
-        MyReact.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
-          MyReact.createElement(
-            'fieldset',
-            null,
-            MyReact.createElement('legend', null, this.props.question),
-            Choices,
-            MyReact.createElement('input', inputButtonProps, null),
-            Message
-          )
-        )
-      );
+      this.setState(this.display());
     }
 
     render() {
-      const Choices = this.props.choices.map(choice => {
-        const inputProps = {
-          type: 'radio',
-          id: choice,
-          value: choice,
-          name: choice,
-          onChange: this.handleChange
-        };
-
-        if (choice === this.state.value) inputProps.checked = true;
-        return MyReact.createElement(
-          'div',
-          null,
-          MyReact.createElement('input', inputProps, null),
-          MyReact.createElement(
-            'label',
-            {
-              for: choice
-            },
-            choice
-          )
-        );
-      });
-
-      const inputButtonProps = {
-        type: 'submit',
-        value: 'Answer'
-      };
-
-      if (!this.state.answered) inputButtonProps.disabled = true;
-
-      return super.render(
-        MyReact.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
-          MyReact.createElement(
-            'fieldset',
-            null,
-            MyReact.createElement('legend', null, this.props.question),
-            Choices,
-            MyReact.createElement('input', inputButtonProps, null)
-          )
-        )
-      );
+      return super.render(this.display());
     }
   }
 
