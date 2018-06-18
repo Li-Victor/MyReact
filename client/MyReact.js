@@ -50,7 +50,7 @@
       const element = document.createElement(type);
       // if it is not a DOM Element, then it is a string
       children.forEach(child => {
-        createC_or_CT(element, child);
+        if (child !== null) createC_or_CT(element, child);
       });
 
       if (props !== null) applyProps(element, props);

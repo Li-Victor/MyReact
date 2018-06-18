@@ -34,14 +34,190 @@
     );
   };
 
-  const Material = ({ name, type, link }) => {
+  class MCQ extends MyReact.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.state = {
+        message: ''
+      };
+    }
+
+    handleChange(event) {
+      this.state.value = event.target.value;
+      this.state.answered = true;
+      const Choices = this.props.choices.map(choice => {
+        const inputProps = {
+          type: 'radio',
+          id: choice,
+          value: choice,
+          name: choice,
+          onChange: this.handleChange
+        };
+
+        if (choice === this.state.value) inputProps.checked = true;
+        return MyReact.createElement(
+          'div',
+          null,
+          MyReact.createElement('input', inputProps, null),
+          MyReact.createElement(
+            'label',
+            {
+              for: choice
+            },
+            choice
+          )
+        );
+      });
+
+      const inputButtonProps = {
+        type: 'submit',
+        value: 'Answer'
+      };
+
+      if (!this.state.answered) inputButtonProps.disabled = true;
+
+      const Message = (message => {
+        if (message === '') return null;
+        return MyReact.createElement('div', null, message);
+      })(this.state.message);
+
+      this.setState(
+        MyReact.createElement(
+          'form',
+          { onSubmit: this.handleSubmit },
+          MyReact.createElement(
+            'fieldset',
+            null,
+            MyReact.createElement('legend', null, this.props.question),
+            Choices,
+            MyReact.createElement('input', inputButtonProps, null),
+            Message
+          )
+        )
+      );
+    }
+
+    handleSubmit(event) {
+      event.preventDefault();
+      this.state.message =
+        this.props.choices[this.props.answer] === this.state.value
+          ? 'Correct!'
+          : 'Wrong!';
+
+      const Choices = this.props.choices.map(choice => {
+        const inputProps = {
+          type: 'radio',
+          id: choice,
+          value: choice,
+          name: choice,
+          onChange: this.handleChange
+        };
+
+        if (choice === this.state.value) inputProps.checked = true;
+        return MyReact.createElement(
+          'div',
+          null,
+          MyReact.createElement('input', inputProps, null),
+          MyReact.createElement(
+            'label',
+            {
+              for: choice
+            },
+            choice
+          )
+        );
+      });
+
+      const inputButtonProps = {
+        type: 'submit',
+        value: 'Answer'
+      };
+
+      if (!this.state.answered) inputButtonProps.disabled = true;
+
+      const Message = (message => {
+        if (message === '') return null;
+        return MyReact.createElement('div', null, message);
+      })(this.state.message);
+
+      this.setState(
+        MyReact.createElement(
+          'form',
+          { onSubmit: this.handleSubmit },
+          MyReact.createElement(
+            'fieldset',
+            null,
+            MyReact.createElement('legend', null, this.props.question),
+            Choices,
+            MyReact.createElement('input', inputButtonProps, null),
+            Message
+          )
+        )
+      );
+    }
+
+    render() {
+      const Choices = this.props.choices.map(choice => {
+        const inputProps = {
+          type: 'radio',
+          id: choice,
+          value: choice,
+          name: choice,
+          onChange: this.handleChange
+        };
+
+        if (choice === this.state.value) inputProps.checked = true;
+        return MyReact.createElement(
+          'div',
+          null,
+          MyReact.createElement('input', inputProps, null),
+          MyReact.createElement(
+            'label',
+            {
+              for: choice
+            },
+            choice
+          )
+        );
+      });
+
+      const inputButtonProps = {
+        type: 'submit',
+        value: 'Answer'
+      };
+
+      if (!this.state.answered) inputButtonProps.disabled = true;
+
+      return super.render(
+        MyReact.createElement(
+          'form',
+          { onSubmit: this.handleSubmit },
+          MyReact.createElement(
+            'fieldset',
+            null,
+            MyReact.createElement('legend', null, this.props.question),
+            Choices,
+            MyReact.createElement('input', inputButtonProps, null)
+          )
+        )
+      );
+    }
+  }
+
+  const Material = ({ name, type, link, question, choices, answer }) => {
     if (type === 'Video') {
       return MyReact.createElement(Video, { name, link }, null);
     } else if (type === 'Website') {
       return MyReact.createElement(WebLink, { name, link }, null);
     } else {
       // MCQ
-      return MyReact.createElement('p', null, `${name} ${type} ${link}`);
+      return MyReact.createElement(
+        MCQ,
+        { name, question, choices, answer },
+        null
+      );
     }
   };
 
@@ -61,8 +237,12 @@
               'details',
               null,
               MyReact.createElement(LessonHeader, { name }, null),
-              materials.map(({ name, type, link }) =>
-                MyReact.createElement(Material, { name, type, link }, null)
+              materials.map(({ name, type, link, question, choices, answer }) =>
+                MyReact.createElement(
+                  Material,
+                  { name, type, link, question, choices, answer },
+                  null
+                )
               )
             );
           })
