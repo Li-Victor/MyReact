@@ -23,9 +23,9 @@ type Lesson {
 # link can be a weblink, videolink, pdflink
 type Material {
   id: ID!
-  name: String!
-  type: String!
-  link: String!
+  name: String
+  type: String
+  link: String
   question: String
   choices: [String]
   answer: Int
@@ -45,5 +45,12 @@ type Mutation {
   createDegree(name: String!, courseIDs: [ID]!): Degree!
   createCourse(name: String!, lessonIDs: [ID]!, tag: [String]!): Course!
   createLesson(name: String!, materialIDs: [ID]!, tag: [String]!): Lesson!
-  createMaterial(type: String!, name: String!, link: String!): Material!
+  createMaterial(
+    type: String
+    name: String
+    link: String
+    question: String
+    choices: [String]
+    answer: Int
+  ): Material!
 }

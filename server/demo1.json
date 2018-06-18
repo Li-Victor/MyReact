@@ -1,79 +1,84 @@
 {
-  "id": 2,
+  "id": 1,
   "name": "Angular",
   "courses": [
     {
-      "id": 1,
+      "id": 0,
       "courseTag": ["Javascript", "Beginner"],
       "name": "Javascript for Beginners",
       "lessons": [
         {
-          "id": 1,
+          "id": 0,
           "lessonTag": ["Variables", "Types"],
+          "name": "Introduction to Javascript",
+          "materials": [
+            {
+              "id": 0,
+              "type": "Video",
+              "name": "Variables",
+              "link": "https://www.youtube.com/watch?v=UAZRq7Ev5No"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "lessonTag": ["Control Flow"],
+          "name": "Learn Javascript: Control Flow",
           "materials": [
             {
               "id": 1,
               "type": "Video",
-              "name": "Introduction to Javascript",
-              "link": "intro.mp4"
+              "name": "Learn Javascript: Control Flow",
+              "link": "https://www.youtube.com/watch?v=4eqJNLl-03U"
             }
           ]
         },
         {
           "id": 2,
-          "lessonTag": ["Control Flow"],
+          "lessonTag": ["Functions"],
+          "name": "Learn Javascript: Functions",
           "materials": [
             {
               "id": 2,
               "type": "Video",
-              "name": "Learn Javascript: Control Flow",
-              "link": "control_flow.mp4"
+              "name": "Learn Javascript: Functions",
+              "link": "https://www.youtube.com/watch?v=uiv3oLsHbaI"
             }
           ]
         },
         {
           "id": 3,
-          "lessonTag": ["Functions"],
+          "lessonTag": ["Scope"],
+          "name": "Learn Javascript: Scope",
           "materials": [
             {
               "id": 3,
               "type": "Video",
-              "name": "Learn Javascript: Functions",
-              "link": "functions.mp4"
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "lessonTag": ["Scope"],
-          "materials": [
-            {
-              "id": 4,
-              "type": "Video",
               "name": "Learn Javascript: Scope",
-              "link": "scope.mp4"
+              "link": "https://www.youtube.com/watch?v=XR84vFUs4M4"
             }
           ]
         }
       ]
     },
     {
-      "id": 2,
+      "id": 1,
       "courseTag": ["Javascript", "Advanced"],
       "name": "Advanced Javascript",
       "lessons": [
         {
-          "id": 5,
-          "lessonTag": ["Scope"],
+          "id": 4,
+          "lessonTag": ["Advanced", "Scope"],
+          "name": "Scope",
           "materials": [
             {
-              "id": 4,
+              "id": 3,
               "type": "Video",
               "name": "Learn Javascript: Scope",
-              "link": "scope.mp4"
+              "link": "https://www.youtube.com/watch?v=XR84vFUs4M4"
             },
             {
-              "id": 5,
+              "id": 4,
               "type": "Website",
               "name": "What is Scope?",
               "link":
@@ -82,14 +87,16 @@
           ]
         },
         {
-          "id": 6,
-          "lessonTag": ["Hoisting"],
+          "id": 5,
+          "lessonTag": ["Advanced", "Hoisting"],
+          "name": "Hoisting",
           "materials": [
             {
-              "id": 6,
-              "type": "PDF",
+              "id": 5,
+              "type": "Website",
               "name": "Hoisting",
-              "link": "Hoisting.pdf"
+              "link":
+                "https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch4.md"
             }
           ]
         }
